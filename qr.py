@@ -1,37 +1,72 @@
 import streamlit as st
 import pandas as pd
+import base64
 
-# Título de la web
-st.title("🎫 Localizador de Mesas")
-st.write("Ingresa tu carnet para saber en qué mesa estás.")
+# 1. CONFIGURACIÓN (Debe ser lo primero)
+st.set_page_config(page_title="Localizador de Mesas", page_icon="logo.png", layout="centered")
 
-# Función para cargar y limpiar datos
+# 2. FUNCIÓN DE FONDO CON CACHÉ (Para evitar el loop de carga)
 @st.cache_data
-def cargar_datos():
-    # Asegúrate de que el nombre coincida con tu archivo Excel
-    df = pd.read_excel('datos.xlsx')
-    # Limpiamos la columna Codigo
-    df['Codigo'] = df['Codigo'].astype(str).str.strip().str.replace('.0', '', regex=False)
-    return df
+def get_base64(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
 
-# Cargar el Excel
+def set_background(file_name):
+    try:
+        bin_str = get_base64(file_name)
+        page_bg_img = f'''
+        <style>
+        .stApp {{
+            background-image: url("data:image/png;base64,{bin_str}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }}
+        /* Cuadro blanco para lectura fácil */
+        .main .block-container {{
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }}
+        </style>
+        '''
+        st.markdown(page_bg_img, unsafe_allow_html=True)
+    except:
+        st.warning("No se pudo cargar la imagen de fondo. Verifica el nombre del archivo.")
+
+# 3. EJECUTAR DISEÑO
+set_background('fondopagina.jpg') # <-- ASEGÚRATE QUE TENGA EL .JPG
+st.image("logo.png", width=200)
+st.title("Localizador de Mesas")
+st.write("Ingresa tu ID para conocer tu ubicación.")
+
+# 4. LÓGICA DE BÚSQUEDA
 try:
-    df = cargar_datos()
+    df = pd.read_excel("prueba.xlsx")
+    id_empleado = st.text_input("ID de Empleado (Ej: E12345)").strip()
 
-    # Input del usuario
-    carnet_input = st.text_input("Número de Carnet:").strip()
+    if id_empleado:
+        # Buscamos en la columna 'Codigo'
+        resultado = df[df['Codigo'].astype(str).str.upper() == id_empleado.upper()]
 
-    if carnet_input:
-        # Buscar en el DataFrame
-        resultado = df[df['Codigo'] == carnet_input]
-        
         if not resultado.empty:
             nombre = resultado.iloc[0]['Persona']
             mesa = resultado.iloc[0]['Mesa']
-            st.success(f"📍 Hola **{nombre}**, tu mesa asignada es la: **{mesa}**")
-            st.balloons()
+            
+            st.success(f"### ¡Hola, {nombre}!")
+            
+            # Lógica de laptops (agrega tus IDs aquí)
+            laptops = ["E11111", "E22222"] 
+            
+            if id_empleado.upper() in laptops:
+                st.info(f"Tu mesa es la **{mesa}**. 💻 **Nota:** Debes traer tu laptop.")
+            else:
+                st.info(f"Tu mesa asignada es la **{mesa}**.")
         else:
-            st.error("⚠️ Carnet no encontrado. Revisa el número.")
+            st.error("ID no encontrado. Por favor, verifica con Recursos Humanos.")
 
 except Exception as e:
-    st.error(f"Error al cargar la base de datos: {e}")
+    st.error(f"Error técnico: {e}")
