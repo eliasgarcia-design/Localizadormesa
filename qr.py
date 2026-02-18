@@ -25,7 +25,7 @@ def set_background(file_name):
             background-attachment: fixed;
         }}
         .main .block-container {{
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: rgba(255, 255, 255, 0.85); 
             padding: 3rem;
             border-radius: 20px;
             margin-top: 2rem;
@@ -102,6 +102,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
