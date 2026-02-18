@@ -28,7 +28,7 @@ def set_background(file_name):
 
         /* ESTE ES EL CUADRO BLANCO SEMITRANSPARENTE */
         .main .block-container {{
-            background-color: rgba(255, 255, 255, 0.90); /* 0.90 es la opacidad */
+            background-color: rgba(255, 255, 255, 0.99); /* 0.90 es la opacidad */
             padding: 3rem;
             border-radius: 20px; /* Bordes redondeados */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
@@ -106,6 +106,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
