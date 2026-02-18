@@ -38,6 +38,39 @@ def set_background(file_name):
 
 # 3. EJECUTAR DISEÑO
 set_background('fondopagina.png') # <-- ASEGÚRATE QUE TENGA EL .JPG
+st.markdown("""
+    <style>
+    /* Cambiar la fuente general a una más corporativa */
+    html, body, [class*="css"]  {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    /* Estilo para el título principal */
+    .titulo-pro {
+        font-size: 32px !important;
+        font-weight: 700;
+        color: #201f1e;
+        margin-bottom: 0px;
+    }
+    /* Estilo para las instrucciones */
+    .instrucciones {
+        font-size: 16px !important;
+        color: #605e5c;
+    }
+    /* Hacer que el botón se vea más como el de la imagen */
+    .stButton>button {
+        background-color: #0078d4;
+        color: white;
+        border-radius: 2px;
+        border: none;
+        padding: 0.5rem 2rem;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image("bluelogo.png", use_column_width=True)
+
 st.image("bluelogo.png", width=200)
 st.title("Localizador de Mesas")
 st.write("Ingresa tu ID para conocer tu ubicación.")
@@ -69,6 +102,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
