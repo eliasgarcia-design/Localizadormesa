@@ -100,7 +100,7 @@ try:
             st.success(f"### ¡Hola, {nombre}!")
             
             # Lógica de laptops (agrega tus IDs aquí)
-            laptops = ["E11111", "E22222"] 
+            laptops = ["E08608", "E05695", "E05049", "E04292", "E06497", "E07746", "E03384", "E01169", "E09134", "E06852", "E02827", "E06405"] 
             
             if id_empleado.upper() in laptops:
                 st.info(f"Tu mesa es la **{mesa}**. Has sido elegido para **traer tu laptop:**.")
@@ -111,6 +111,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
