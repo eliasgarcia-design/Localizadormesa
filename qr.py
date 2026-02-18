@@ -3,7 +3,7 @@ import pandas as pd
 import base64
 
 # 1. CONFIGURACIÓN (Debe ser lo primero)
-st.set_page_config(page_title="Localizador de Mesas", page_icon="logo.png", layout="centered")
+st.set_page_config(page_title="Localizador de Mesas", page_icon="bluelogo.png", layout="centered")
 
 # 2. FUNCIÓN DE FONDO CON CACHÉ (Para evitar el loop de carga)
 @st.cache_data
@@ -12,9 +12,9 @@ def get_base64(bin_file):
         data = f.read()
     return base64.b64encode(data).decode()
 
-def set_background(file_name):
+def set_background(fondopagina.png):
     try:
-        bin_str = get_base64(file_name)
+        bin_str = get_base64(fondopagina.png)
         page_bg_img = f'''
         <style>
         .stApp {{
@@ -39,21 +39,21 @@ def set_background(file_name):
 
 # 3. EJECUTAR DISEÑO
 set_background('fondopagina.jpg') # <-- ASEGÚRATE QUE TENGA EL .JPG
-st.image("logo.png", width=200)
+st.image("bluelogo.png", width=200)
 st.title("Localizador de Mesas")
 st.write("Ingresa tu ID para conocer tu ubicación.")
 
 # 4. LÓGICA DE BÚSQUEDA
 try:
-    df = pd.read_excel("prueba.xlsx")
+    df = pd.read_excel("invitados prueba.xlsx")
     id_empleado = st.text_input("ID de Empleado (Ej: E12345)").strip()
 
     if id_empleado:
         # Buscamos en la columna 'Codigo'
-        resultado = df[df['Codigo'].astype(str).str.upper() == id_empleado.upper()]
+        resultado = df[df['ID EMP'].astype(str).str.upper() == id_empleado.upper()]
 
         if not resultado.empty:
-            nombre = resultado.iloc[0]['Persona']
+            nombre = resultado.iloc[0]['Invitado']
             mesa = resultado.iloc[0]['Mesa']
             
             st.success(f"### ¡Hola, {nombre}!")
@@ -62,7 +62,7 @@ try:
             laptops = ["E11111", "E22222"] 
             
             if id_empleado.upper() in laptops:
-                st.info(f"Tu mesa es la **{mesa}**. 💻 **Nota:** Debes traer tu laptop.")
+                st.info(f"Tu mesa es la **{mesa}**. Has sido elegido para **traer tu laptop:**.")
             else:
                 st.info(f"Tu mesa asignada es la **{mesa}**.")
         else:
@@ -70,3 +70,4 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
