@@ -12,6 +12,7 @@ def get_base64(bin_file):
         data = f.read()
     return base64.b64encode(data).decode()
 
+
 def set_background(file_name):
     try:
         bin_str = get_base64(file_name)
@@ -23,20 +24,17 @@ def set_background(file_name):
             background-position: center;
             background-attachment: fixed;
         }}
-    /* Esto crea el cuadro blanco semitransparente para que el texto sea legible */
-    .main .block-container {{
-        background-color: rgba(255, 255, 255, 0.85); 
-        padding: 3rem;
-        border-radius: 20px;
-        margin-top: 2rem;
-    }}
-    </style>
-    '''
-    st.markdown(page_bg_img, unsafe_allow_html=True)
+        .main .block-container {{
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+        }}
+        </style>
         '''
         st.markdown(page_bg_img, unsafe_allow_html=True)
-    except:
-        st.warning("No se pudo cargar la imagen de fondo. Verifica el nombre del archivo.")
+    except Exception as e:
+        st.warning(f"No se pudo cargar la imagen: {file_name}. Revisa que el nombre sea idéntico en GitHub.")
 
 # 3. EJECUTAR DISEÑO
 set_background('fondopagina.png') # <-- ASEGÚRATE QUE TENGA EL .JPG
@@ -71,6 +69,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
