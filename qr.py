@@ -12,7 +12,7 @@ def get_base64(bin_file):
         data = f.read()
     return base64.b64encode(data).decode()
 
-def set_background(fondopagina.png):
+def set_background(file_name):
     try:
         bin_str = get_base64(fondopagina.png)
         page_bg_img = f'''
@@ -70,4 +70,5 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
