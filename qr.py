@@ -18,24 +18,28 @@ def set_background(file_name):
         bin_str = get_base64(file_name)
         page_bg_img = f'''
         <style>
+        /* Fondo de la aplicación */
         .stApp {{
             background-image: url("data:image/png;base64,{bin_str}");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }}
+
+        /* ESTE ES EL CUADRO BLANCO SEMITRANSPARENTE */
         .main .block-container {{
-            background-color: rgba(255, 255, 255, 0.85); 
+            background-color: rgba(255, 255, 255, 0.90); /* 0.90 es la opacidad */
             padding: 3rem;
-            border-radius: 20px;
+            border-radius: 20px; /* Bordes redondeados */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
             margin-top: 2rem;
+            max-width: 700px; /* Centra y limita el ancho del cuadro */
         }}
         </style>
         '''
         st.markdown(page_bg_img, unsafe_allow_html=True)
     except Exception as e:
-        st.warning(f"No se pudo cargar la imagen: {file_name}. Revisa que el nombre sea idéntico en GitHub.")
-
+        st.warning(f"No se pudo cargar la imagen de fondo: {file_name}")
 # 3. EJECUTAR DISEÑO
 set_background('fondopagina.png') # <-- ASEGÚRATE QUE TENGA EL .JPG
 st.markdown("""
@@ -102,6 +106,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
