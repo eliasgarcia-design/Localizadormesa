@@ -107,10 +107,11 @@ try:
             else:
                 st.info(f"Tu mesa asignada es la **{mesa}**.")
         else:
-            st.error("ID no encontrado. Por favor, verifica con Recursos Humanos.")
+            st.error("ID no encontrado.")
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
