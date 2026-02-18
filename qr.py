@@ -23,15 +23,16 @@ def set_background(file_name):
             background-position: center;
             background-attachment: fixed;
         }}
-        /* Cuadro blanco para lectura fácil */
-        .main .block-container {{
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-top: 50px;
-        }}
-        </style>
+    /* Esto crea el cuadro blanco semitransparente para que el texto sea legible */
+    .main .block-container {{
+        background-color: rgba(255, 255, 255, 0.85); 
+        padding: 3rem;
+        border-radius: 20px;
+        margin-top: 2rem;
+    }}
+    </style>
+    '''
+    st.markdown(page_bg_img, unsafe_allow_html=True)
         '''
         st.markdown(page_bg_img, unsafe_allow_html=True)
     except:
@@ -70,6 +71,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
