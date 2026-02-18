@@ -38,7 +38,7 @@ def set_background(file_name):
         st.warning("No se pudo cargar la imagen de fondo. Verifica el nombre del archivo.")
 
 # 3. EJECUTAR DISEÑO
-set_background('fondopagina.jpg') # <-- ASEGÚRATE QUE TENGA EL .JPG
+set_background('fondopagina.png') # <-- ASEGÚRATE QUE TENGA EL .JPG
 st.image("bluelogo.png", width=200)
 st.title("Localizador de Mesas")
 st.write("Ingresa tu ID para conocer tu ubicación.")
@@ -70,5 +70,6 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
