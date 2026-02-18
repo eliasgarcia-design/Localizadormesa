@@ -14,7 +14,7 @@ def get_base64(bin_file):
 
 def set_background(file_name):
     try:
-        bin_str = get_base64(fondopagina.png)
+        bin_str = get_base64(file_name)
         page_bg_img = f'''
         <style>
         .stApp {{
@@ -70,6 +70,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
