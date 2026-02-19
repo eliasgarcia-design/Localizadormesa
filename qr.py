@@ -76,10 +76,6 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.image("bluelogo.png", use_column_width=True)
-
 st.image("bluelogo.png", width=200)
 st.title("Localizador de Mesas")
 st.write("Ingresa tu ID para conocer tu ubicación.")
@@ -111,6 +107,7 @@ try:
 
 except Exception as e:
     st.error(f"Error técnico: {e}")
+
 
 
 
